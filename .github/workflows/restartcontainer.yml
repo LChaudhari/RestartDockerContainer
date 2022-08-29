@@ -4,7 +4,7 @@ on:
  
   workflow_dispatch:
     inputs:
-      key:
+      keynm:
         description: 'Enter the key name'
         required: true
         default: ''
@@ -35,6 +35,8 @@ jobs:
         sh dokstart.sh -k nginx1.pem -u ec2-user -p 10.0.2.181 -c Nginx
    
       env:
-        name: build
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+        
+            --extra-vars "keyname=\"${{ github.event.inputs.keynm }}\" usrnm=\"${{ github.event.inputs.user_name }}\" ip=\"${{ github.event.inputs.ip_address }}" containernm=\"${{ github.event.inputs.container_name }}\"" \
