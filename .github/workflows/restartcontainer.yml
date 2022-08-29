@@ -26,7 +26,7 @@ jobs:
     runs-on: linux-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Restart the container
+    - name: Restart that container
       run: |
         chmod +x restartdoc.sh
         sh dokstart.sh -k nginx1.pem -u ec2-user -p 10.0.2.181 -c Nginx
