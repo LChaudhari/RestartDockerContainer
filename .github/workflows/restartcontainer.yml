@@ -1,0 +1,23 @@
+name: Automatically restart docker container
+
+on:
+ 
+  workflow_dispatch:
+    inputs:
+      key:
+        description: 'Enter the key name'
+        required: true
+        default: ''
+      user_name:
+        description: 'Enter the user name'
+        required: true
+        default: ''
+      ip_address:
+        description: 'Enter the ip address'
+        required: true
+        default: ''
+      container_name:
+        description: 'Enter the conatiner name that you want to restart'
+        required: true
+        default: ''
+
