@@ -22,11 +22,8 @@ on:
         default: ''
 
 jobs:
-
   build:
-
     runs-on: linux-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Restart that container
