@@ -1,4 +1,5 @@
 #!/bin/bash
+#docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Image}}"
 
 while getopts k:u:p:c: flag
 do
@@ -14,7 +15,9 @@ echo "Username: $usrnm";
 echo "IPAddress: $ip";
 echo "ContainerName: $contnm";
 
-if [ $contnm == "Nginx" ]; then
+var=$(ssh -i $key $usrnm@$ip  "sudo docker ps -a --format 'table {{.Names}}' | grep "$contnm"; exit 0")
+
+if [ "$contnm" = "$var" ]; then
         ssh -i $key $usrnm@$ip  "sudo docker ps -a --format 'table {{.ID}}\t{{.Names}}\t{{.Image}}'; sudo docker restart $contnm"
         #ssh -i $key $usrnm@$ip "sudo docker restart $contnm"
 else
