@@ -4,10 +4,10 @@ on:
  
   workflow_dispatch:
     inputs:
-      keynm:
-        description: 'Enter the key name'
-        required: true
-        default: ''
+      # keynm:
+      #   description: 'Enter the key name'
+      #   required: true
+      #   default: ''
       user_name:
         description: 'Enter the user name'
         required: true
@@ -28,12 +28,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: Restart the container
       run: |
-        chmod +x restartdoc.sh
-        sh dokstart.sh -k nginx1.pem -u ec2-user -p 10.0.2.181 -c Nginx
+        sudo chmod +x restartdoc.sh
+        sudo sh restartdoc.sh -u ${{ github.event.inputs.user_name }} -p {{ github.event.inputs.ip_address }} -c {{ github.event.inputs.container_name }}
    
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-        
-            --extra-vars "keyname=\"${{ github.event.inputs.keynm }}\" usrnm=\"${{ github.event.inputs.user_name }}\" ip=\"${{ github.event.inputs.ip_address }}" containernm=\"${{ github.event.inputs.container_name }}\"" \
