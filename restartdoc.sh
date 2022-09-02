@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while getopts k:u:p:c: flag
+while getopts u:p:c: flag
 do
     case "${flag}" in
         # k) key=${OPTARG};;
