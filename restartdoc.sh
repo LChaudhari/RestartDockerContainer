@@ -21,4 +21,9 @@ if [ "$contnm" = "$var" ]; then
         #ssh -i $key $usrnm@$ip "sudo docker restart $contnm"
 else
         echo "$contnm container not found"
+<<<<<<< HEAD
 fi
+=======
+fi
+
+>>>>>>> main
