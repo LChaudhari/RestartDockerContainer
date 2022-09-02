@@ -1,10 +1,9 @@
 #!/bin/bash
-#docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Image}}"
 
 while getopts k:u:p:c: flag
 do
     case "${flag}" in
-        k) key=${OPTARG};;
+        # k) key=${OPTARG};;
         u) usrnm=${OPTARG};;
         p) ip=${OPTARG};;
         c) contnm=${OPTARG};;
@@ -23,7 +22,3 @@ if [ "$contnm" = "$var" ]; then
 else
         echo "$contnm container not found"
 fi
-<<<<<<< HEAD
-
-=======
->>>>>>> e2df3130cb6bafe48c9a3e4a25255a23418bee59
