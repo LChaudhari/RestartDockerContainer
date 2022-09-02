@@ -9,7 +9,7 @@ do
         c) contnm=${OPTARG};;
     esac
 done
-echo "Key: $key";
+#echo "Key: $key";
 echo "Username: $usrnm";
 echo "IPAddress: $ip";
 echo "ContainerName: $contnm";
