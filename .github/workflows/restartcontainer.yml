@@ -23,27 +23,10 @@ on:
 
 jobs:
   build:
-<<<<<<< HEAD
     runs-on: self-hosted
-=======
-<<<<<<< HEAD
-    runs-on: ubuntu-latest
-=======
-    runs-on: self-hosted
->>>>>>> e2df3130cb6bafe48c9a3e4a25255a23418bee59
->>>>>>> main
     steps:
     - uses: actions/checkout@v2
     - name: Restart the container
       run: |
         sudo chmod +x restartdoc.sh
-<<<<<<< HEAD
         sudo sh restartdoc.sh -u ${{ github.event.inputs.user_name }} -p {{ github.event.inputs.ip_address }} -c {{ github.event.inputs.container_name }}
-=======
-        sudo sh restartdoc.sh -u ${{ github.event.inputs.user_name }} -p {{ github.event.inputs.ip_address }} -c {{ github.event.inputs.container_name }}
-<<<<<<< HEAD
-   
-=======
-   
->>>>>>> e2df3130cb6bafe48c9a3e4a25255a23418bee59
->>>>>>> main
