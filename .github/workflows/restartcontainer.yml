@@ -28,6 +28,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: Restart the container
       run: |
-        sudo chmod +x RestartDockerContainer/restartdoc.sh
+        sudo chmod +x  LChaudhari/RestartDockerContainer/restartdoc.sh
         sudo sh RestartDockerContainer/restartdoc.sh -u ${{ github.event.inputs.user_name }} -p {{ github.event.inputs.ip_address }} -c {{ github.event.inputs.container_name }}
    
