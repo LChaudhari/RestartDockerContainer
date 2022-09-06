@@ -14,10 +14,10 @@ echo "Username: $usrnm";
 echo "IPAddress: $ip";
 echo "ContainerName: $contnm";
 
-var=$(ssh $usrnm@$ip -tt "sudo docker ps -a --format 'table {{.Names}}' | grep "$contnm"; exit 0")
+var=$(ssh $usrnm@$ip -t "sudo docker ps -a --format 'table {{.Names}}' | grep "$contnm"; exit 0")
 
 if [ "$contnm" = "$var" ]; then
-        ssh $usrnm@$ip -tt "sudo docker ps -a --format 'table {{.ID}}\t{{.Names}}\t{{.Image}}'; sudo docker restart $contnm"
+        ssh $usrnm@$ip -t "sudo docker ps -a --format 'table {{.ID}}\t{{.Names}}\t{{.Image}}'; sudo docker restart $contnm"
         #ssh -i $key $usrnm@$ip "sudo docker restart $contnm"
 else
         echo "$contnm container not found"
