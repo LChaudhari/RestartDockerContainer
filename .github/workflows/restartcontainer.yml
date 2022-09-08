@@ -1,7 +1,7 @@
 name: Automatically restart docker container
 
 on:
- 
+
   workflow_dispatch:
     inputs:
       # keynm:
