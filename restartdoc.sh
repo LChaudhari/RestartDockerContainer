@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while getopts k:u:p:c: flag
+while getopts u:p:c: flag
 do
     case "${flag}" in
         # k) key=${OPTARG};;
@@ -9,21 +9,16 @@ do
         c) contnm=${OPTARG};;
     esac
 done
-echo "Key: $key";
+#echo "Key: $key";
 echo "Username: $usrnm";
 echo "IPAddress: $ip";
 echo "ContainerName: $contnm";
 
-var=$(ssh -i $key $usrnm@$ip  "sudo docker ps -a --format 'table {{.Names}}' | grep "$contnm"; exit 0")
+var=$(ssh -o "StrictHostKeyChecking no" $usrnm@$ip -t "sudo docker ps -a --format 'table {{.Names}}' | grep "$contnm"; exit 0")
 
 if [ "$contnm" = "$var" ]; then
-        ssh -i $key $usrnm@$ip  "sudo docker ps -a --format 'table {{.ID}}\t{{.Names}}\t{{.Image}}'; sudo docker restart $contnm"
+        ssh -o "StrictHostKeyChecking no" $usrnm@$ip -t "sudo docker ps -a --format 'table {{.ID}}\t{{.Names}}\t{{.Image}}'; sudo docker restart $contnm"
         #ssh -i $key $usrnm@$ip "sudo docker restart $contnm"
 else
         echo "$contnm container not found"
-<<<<<<< HEAD
 fi
-=======
-fi
-
->>>>>>> main
