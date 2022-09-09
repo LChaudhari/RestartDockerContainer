@@ -27,8 +27,8 @@ var=$(ssh -o "StrictHostKeyChecking no" $usrnm@$ip -t "sudo docker ps -a --forma
 if [ "$contnm" = "$var" ]; then
         ssh -o "StrictHostKeyChecking no" $usrnm@$ip -t "sudo docker ps -a --format 'table {{.ID}}\t{{.Names}}\t{{.Image}}'; sudo docker restart $contnm"
         echo "Container Restart Successfully"
-        export sucess=true
+     
 else
         echo "$contnm container not found"
-        export sucess=false
+        exit 0
 fi
