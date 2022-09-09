@@ -42,7 +42,7 @@ jobs:
         echo $sucess
         
     - name: Slack Notification
-      if: sucess()
+      if: success()
       run: |
         SLACK_WEBHOOK_URL= ${{ secrets.SLACK_GITHUB_ACTIONS_ALERTS_WEBHOOK }}
         notify_string="Test String" 
