@@ -10,16 +10,21 @@ on:
       #   default: ''
       user_name:
         description: 'Enter the user name'
+
         required: true
-        default: ''
+        default: 'ec2-user'
       ip_address:
         description: 'Enter the ip address'
         required: true
-        default: ''
+        default: '172.31.96.27'
       container_name:
+        type: choice
         description: 'Enter the conatiner name that you want to restart'
+        options:
+        - Nginx
+        - Apache
         required: true
-        default: ''
+        default: 'Nginx'
 
 jobs:
   build:
