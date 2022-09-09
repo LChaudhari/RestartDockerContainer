@@ -29,6 +29,10 @@ on:
 jobs:
   build:
     runs-on: self-hosted
+    env:
+      ACTION_URL: "https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks"
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_GITHUB_ACTIONS_ALERTS_WEBHOOK }}
+
     steps:
     - uses: actions/checkout@v2
     - name: Restart the container
@@ -36,3 +40,13 @@ jobs:
         ls
         sudo chmod +x ./restartdoc.sh
         sudo sh ./restartdoc.sh -u ${{ github.event.inputs.user_name }} -p ${{ github.event.inputs.ip_address }} -c ${{ github.event.inputs.container_name }}
+
+    - name: Success Notification
+      if: Success()
+      run: |
+        if [ ${{ github.event_name }} == 'workflow_dispatch' ]; then
+          export Author=${{ github.event.sender.login }}
+        else
+          export Author="GitHub Action Crons"
+        fi
+        ./github_slack.sh '${{ github.event_name }}' 'Success' "@here Docker Container Uptime monitor Job Success" '${{ env.ACTION_URL }}' '${{ github.event.repository.html_url }}' 'Docker Containers Restart Successful' '${{ secrets.SLACK_GITHUB_ACTIONS_ALERTS_WEBHOOK }}' '' "$Author"
