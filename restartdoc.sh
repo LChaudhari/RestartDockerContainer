@@ -1,3 +1,4 @@
+#!/bin/bash
 
 while getopts u:p:c:s: flag
 do
