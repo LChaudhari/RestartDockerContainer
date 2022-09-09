@@ -29,10 +29,6 @@ on:
 jobs:
   build:
     runs-on: self-hosted
-    #env:
-     # ACTION_URL: "https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks"
-     # SLACK_WEBHOOK_URL: ${{ secrets.SLACK_GITHUB_ACTIONS_ALERTS_WEBHOOK }}
-
     steps:
     - uses: actions/checkout@v2
     - name: Restart the container
@@ -45,8 +41,15 @@ jobs:
       if: success()
       run: |
         SLACK_WEBHOOK_URL=${{ secrets.SLACK_GITHUB_ACTIONS_ALERTS_WEBHOOK }}
-        notify_string="Test String" 
+        notify_string="Docker Container Restart Successful" 
         curl -sk -d "payload={\"channel\": \"#alerts-low-priority\", \"username\": \"Docker Container Restart Successful\", \"text\":  \"${notify_string}\"}" ${SLACK_WEBHOOK_URL}
+
+    - name: Failure Notification
+      if: failure()
+      run: |
+        SLACK_WEBHOOK_URL=${{ secrets.SLACK_GITHUB_ACTIONS_ALERTS_WEBHOOK }}
+        notify_string="Docker Container Restart 'Fails'" 
+        curl -sk -d "payload={\"channel\": \"#alerts-low-priority\", \"username\": \"Docker Container Restart Fails\", \"text\":  \"${notify_string}\"}" ${SLACK_WEBHOOK_URL}
 
 
     # - name: Success Notification
