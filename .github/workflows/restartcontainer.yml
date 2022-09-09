@@ -44,7 +44,7 @@ jobs:
     - name: Slack Notification
       if: sucess()
       run: |
-        SLACK_WEBHOOK_URL= $slackvar
+        SLACK_WEBHOOK_URL= ${{ secrets.SLACK_GITHUB_ACTIONS_ALERTS_WEBHOOK }}
         notify_string="Test String" 
         curl -sk -d "payload={\"channel\": \"#low-high-priority\", \"username\": \"Docker Container Restart Successful\", \"text\":  \"${notify_string}\"}" ${SLACK_WEBHOOK_URL}
 
