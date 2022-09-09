@@ -15,10 +15,11 @@ done
 echo "Username: $usrnm";
 echo "IPAddress: $ip";
 echo "ContainerName: $contnm";
+echo "Slackvar: $slackvar";
 
 slack_notification (){
    SLACK_WEBHOOK_URL= $slackvar
-   notify_string=$1
+   notify_string="Test String" 
    curl -sk -d "payload={\"channel\": \"#low-high-priority\", \"username\": \"Docker Container Restart Successful\", \"text\":  \"${notify_string}\"}" ${SLACK_WEBHOOK_URL}
 }
 
