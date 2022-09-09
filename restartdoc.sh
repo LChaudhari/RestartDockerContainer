@@ -17,11 +17,11 @@ echo "IPAddress: $ip";
 echo "ContainerName: $contnm";
 echo "Slackvar: $slackvar";
 
-slack_notification (){
-   SLACK_WEBHOOK_URL= $slackvar
-   notify_string="Test String" 
-   curl -sk -d "payload={\"channel\": \"#low-high-priority\", \"username\": \"Docker Container Restart Successful\", \"text\":  \"${notify_string}\"}" ${SLACK_WEBHOOK_URL}
-}
+#slack_notification (){
+ #  SLACK_WEBHOOK_URL= $slackvar
+  # notify_string="Test String" 
+   #curl -sk -d "payload={\"channel\": \"#low-high-priority\", \"username\": \"Docker Container Restart Successful\", \"text\":  \"${notify_string}\"}" ${SLACK_WEBHOOK_URL}
+#}
 
 var=$(ssh -o "StrictHostKeyChecking no" $usrnm@$ip -t "sudo docker ps -a --format 'table {{.Names}}' | grep "$contnm"; exit 0")
 
