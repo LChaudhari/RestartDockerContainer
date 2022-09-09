@@ -30,4 +30,5 @@ if [ "$contnm" = "$var" ]; then
         echo "Container Restart Successfully"
 else
         echo "$contnm container not found"
+        sucess=false
 fi
