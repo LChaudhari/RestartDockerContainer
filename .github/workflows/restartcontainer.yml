@@ -40,6 +40,14 @@ jobs:
         sudo chmod +x ./restartdoc.sh
         sudo ./restartdoc.sh -u ${{ github.event.inputs.user_name }} -p ${{ github.event.inputs.ip_address }} -c ${{ github.event.inputs.container_name }} -s ${{ secrets.SLACK_GITHUB_ACTIONS_ALERTS_WEBHOOK }}
         echo $sucess
+        
+    - name: Slack Notification
+      if: sucess()
+      run: |
+        SLACK_WEBHOOK_URL= $slackvar
+        notify_string="Test String" 
+        curl -sk -d "payload={\"channel\": \"#low-high-priority\", \"username\": \"Docker Container Restart Successful\", \"text\":  \"${notify_string}\"}" ${SLACK_WEBHOOK_URL}
+
 
     # - name: Success Notification
     #   if: Success()
