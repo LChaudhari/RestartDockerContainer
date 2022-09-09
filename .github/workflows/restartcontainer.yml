@@ -41,7 +41,7 @@ jobs:
         sudo chmod +x ./restartdoc.sh
         sudo sh ./restartdoc.sh -u ${{ github.event.inputs.user_name }} -p ${{ github.event.inputs.ip_address }} -c ${{ github.event.inputs.container_name }}
 
-    - name: Success Notification
-      if: Success()
-      run: |
-        ./github_slack.sh '${{ github.event_name }}' 'Success' '@here Docker Container Restart Success' '${{ env.ACTION_URL }}' '${{ github.event.repository.html_url }}' 'Docker Containers Restart Successful' '${{ secrets.SLACK_GITHUB_ACTIONS_ALERTS_WEBHOOK }}' '' '${{ github.actor }}'
+    # - name: Success Notification
+    #   if: Success()
+    #   run: |
+    #     ./github_slack.sh '${{ github.event_name }}' 'Success' '@here Docker Container Restart Success' '${{ env.ACTION_URL }}' '${{ github.event.repository.html_url }}' 'Docker Containers Restart Successful' '${{ secrets.SLACK_GITHUB_ACTIONS_ALERTS_WEBHOOK }}' '' '${{ github.actor }}'

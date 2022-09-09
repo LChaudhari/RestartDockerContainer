@@ -1,5 +1,11 @@
 #!/bin/bash
 
+slack_notification (){
+   SLACK_WEBHOOK_URL= ${{ secrets.SLACK_GITHUB_ACTIONS_ALERTS_WEBHOOK }}
+   notify_string=$1
+   curl -sk -d "payload={\"channel\": \"#low-high-priority\", \"username\": \"Docker Container Restart Successful\", \"text\":  \"${notify_string}\"}" ${SLACK_WEBHOOK_URL}
+}
+
 while getopts u:p:c: flag
 do
     case "${flag}" in
