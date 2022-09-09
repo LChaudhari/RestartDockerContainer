@@ -1,10 +1,5 @@
 #!/bin/bash
 
-slack_notification (){
-   SLACK_WEBHOOK_URL= $slackvar
-   notify_string=$1
-   curl -sk -d "payload={\"channel\": \"#low-high-priority\", \"username\": \"Docker Container Restart Successful\", \"text\":  \"${notify_string}\"}" ${SLACK_WEBHOOK_URL}
-}
 
 while getopts u:p:c:s: flag
 do
@@ -20,6 +15,12 @@ done
 echo "Username: $usrnm";
 echo "IPAddress: $ip";
 echo "ContainerName: $contnm";
+
+slack_notification (){
+   SLACK_WEBHOOK_URL= $slackvar
+   notify_string=$1
+   curl -sk -d "payload={\"channel\": \"#low-high-priority\", \"username\": \"Docker Container Restart Successful\", \"text\":  \"${notify_string}\"}" ${SLACK_WEBHOOK_URL}
+}
 
 var=$(ssh -o "StrictHostKeyChecking no" $usrnm@$ip -t "sudo docker ps -a --format 'table {{.Names}}' | grep "$contnm"; exit 0")
 
