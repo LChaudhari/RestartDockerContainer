@@ -30,5 +30,5 @@ if [ "$contnm" = "$var" ]; then
      
 else
         echo "$contnm container not found"
-        exit 0
+        exit 1
 fi
