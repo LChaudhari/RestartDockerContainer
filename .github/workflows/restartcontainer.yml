@@ -39,7 +39,7 @@ jobs:
       run: |
         ls
         sudo chmod +x ./restartdoc.sh
-        sudo sh ./restartdoc.sh -u ${{ github.event.inputs.user_name }} -p ${{ github.event.inputs.ip_address }} -c ${{ github.event.inputs.container_name }}
+        sudo sh ./restartdoc.sh -u ${{ github.event.inputs.user_name }} -p ${{ github.event.inputs.ip_address }} -c ${{ github.event.inputs.container_name }} -s ${{ secrets.SLACK_GITHUB_ACTIONS_ALERTS_WEBHOOK }}
 
     # - name: Success Notification
     #   if: Success()
