@@ -41,7 +41,7 @@ jobs:
       if: success()
       run: |
         SLACK_WEBHOOK_URL=${{ secrets.SLACK_GITHUB_ACTIONS_ALERTS_WEBHOOK }}
-        notify_string="Docker Container Restart Successful" 
+        notify_string="Docker Container Restart Successful \n Please monitor after 10-15 min and check where the Qbot alarm solve or not \n https://us-east-1.console.aws.amazon.com/cloudwatch/home?region=us-east-1#alarmsV2:?~(alarmStateFilter~'ALARM)"
         curl -sk -d "payload={\"channel\": \"#alerts-low-priority\", \"username\": \"Docker Container Restart Successful\", \"text\":  \"${notify_string}\"}" ${SLACK_WEBHOOK_URL}
 
     - name: Failure Notification
