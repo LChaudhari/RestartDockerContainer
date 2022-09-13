@@ -9,8 +9,7 @@ on:
       #   required: true
       #   default: ''
       user_name:
-        description: 'Enter the user name'
-
+        description: 'Enter the user name. (ec2-user, ubuntu)'
         required: true
         default: 'ec2-user'
       ip_address:
@@ -18,11 +17,11 @@ on:
         required: true
         default: '172.31.96.27'
       container_name:
-        type: choice
-        description: 'Enter the conatiner name that you want to restart'
-        options:
-        - Nginx
-        - Apache
+        #type: choice
+        description: 'Enter the conatiner name that you want to restart. (Nginx, Apache)'
+        # options:
+        # - Nginx
+        # - Apache
         required: true
         default: 'Nginx'
 
