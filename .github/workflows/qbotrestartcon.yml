@@ -1,0 +1,34 @@
+name: Automatically restart docker container
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+    - name: Restart the container
+      run: |
+        pwd
+        sudo chmod +x ./qbotrestart.sh
+        sudo ./qbotrestart.sh -u ${{ github.event.inputs.user_name }} -p ${{ github.event.inputs.ip_address }} -c ${{ github.event.inputs.container_name }} -s ${{ secrets.SLACK_GITHUB_ACTIONS_ALERTS_WEBHOOK }}
+        echo $sucess
+        
+    - name: Slack Notification
+      if: success()
+      run: |
+        SLACK_WEBHOOK_URL=${{ secrets.SLACK_GITHUB_ACTIONS_ALERTS_WEBHOOK }}
+        notify_string="Docker Container Restart Successful \n Please monitor after 10-15 min and check where the Qbot alarm solve or not \n https://us-east-1.console.aws.amazon.com/cloudwatch/home?region=us-east-1#alarmsV2:?~(alarmStateFilter~'ALARM) \n It is also in ALarm state then Check the Qbot Server"
+        curl -sk -d "payload={\"channel\": \"#alerts-low-priority\", \"username\": \"Docker Container Restart Successful\", \"text\":  \"${notify_string}\"}" ${SLACK_WEBHOOK_URL}
+    - name: Failure Notification
+      if: failure()
+      run: |
+        SLACK_WEBHOOK_URL=${{ secrets.SLACK_GITHUB_ACTIONS_ALERTS_WEBHOOK }}
+        notify_string="Docker Container Restart 'Fails'" 
+        curl -sk -d "payload={\"channel\": \"#alerts-low-priority\", \"username\": \"Docker Container Restart Fails\", \"text\":  \"${notify_string}\"}" ${SLACK_WEBHOOK_URL}
