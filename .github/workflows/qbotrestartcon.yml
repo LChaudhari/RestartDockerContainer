@@ -1,4 +1,4 @@
-name: Automatically restart docker container
+name: Restart docker container
 
 on:
   push:
