@@ -1,20 +1,18 @@
 #!/bin/bash
 
-while getopts u:p:c:s: flag
+while getopts u:p:c: flag
 do
     case "${flag}" in
         # k) key=${OPTARG};;
         u) usrnm=${OPTARG};;
         p) ip=${OPTARG};;
         c) contnm=${OPTARG};;
-        s) slackvar=${OPTARG};;
     esac
 done
 #echo "Key: $key";
 echo "Username: $usrnm";
 echo "IPAddress: $ip";
 echo "ContainerName: $contnm";
-echo "Slackvar: $slackvar";
 
 #slack_notification (){
  #  SLACK_WEBHOOK_URL= $slackvar
