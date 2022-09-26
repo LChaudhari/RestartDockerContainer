@@ -1,12 +1,8 @@
 name: Automatically restart docker container
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-  repository_dispatch:
-    types: qbot_restart
+  #repository_dispatch:
+   # types: qbot_restart
 
   workflow_dispatch:
     inputs:
