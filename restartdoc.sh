@@ -1,18 +1,19 @@
 #!/bin/bash
 
-while getopts u:p: flag
+while getopts u:p:c: flag
 do
     case "${flag}" in
         # k) key=${OPTARG};;
         u) usrnm=${OPTARG};;
         p) ip=${OPTARG};;
-        #c) contnm=${OPTARG};;
+        c) contnm=${OPTARG};;
     esac
 done
 #echo "Key: $key";
 echo "Username: $usrnm";
 echo "IPAddress: $ip";
-#echo "ContainerName: $contnm";
+echo "ContainerName: $contnm";
+
 
 #slack_notification (){
  #  SLACK_WEBHOOK_URL= $slackvar
@@ -22,11 +23,11 @@ echo "IPAddress: $ip";
 
 var=$(ssh -o "StrictHostKeyChecking no" $usrnm@$ip -t "sudo docker ps -a --format 'table {{.Names}}' | grep "$contnm"; exit 0")
 
-#if [ "$contnm" = "$var" ]; then
-ssh -o "StrictHostKeyChecking no" $usrnm@$ip -t "sudo docker ps -a --format 'table {{.ID}}\t{{.Names}}\t{{.Image}}'; sudo docker restart $(sudo docker ps -a -q)"
-echo "Container Restart Successfully"
+if [ "$contnm" = "$var" ]; then
+        ssh -o "StrictHostKeyChecking no" $usrnm@$ip -t "sudo docker ps -a --format 'table {{.ID}}\t{{.Names}}\t{{.Image}}'; sudo docker restart $contnm"
+        echo "Container Restart Successfully"
      
-#else
-   #     echo "$contnm container not found"
-    #    exit 1
-#fi
+else
+        echo "$contnm container not found"
+        exit 1
+fi
