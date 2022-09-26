@@ -1,6 +1,8 @@
 name: Automatically restart docker container
 
 on:
+  repository_dispatch:
+    types: qbot_restart
 
   workflow_dispatch:
     inputs:
