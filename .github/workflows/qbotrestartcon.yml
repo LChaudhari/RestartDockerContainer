@@ -1,12 +1,12 @@
 name: Restart docker container
 
 on:
-#   push:
-#     branches: [ "master" ]
-#   pull_request:
-#     branches: [ "master" ]
-#   repository_dispatch:
-#     types: qbot_restart
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  repository_dispatch:
+    types: qbot_restart
 
   workflow_dispatch:
   
