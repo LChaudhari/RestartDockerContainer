@@ -17,9 +17,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Restart the container
       run: |
-        pwd
-        cp /home/ec2-user/.ssh/id_rsa ~/.ssh/
-        chmod 400 * ~/.ssh/ 
+        pwd 
         sudo chmod +x ./qbotrestart.sh
         sudo ./qbotrestart.sh -u ${{ github.event.inputs.user_name }} -p ${{ github.event.inputs.ip_address }} -c ${{ github.event.inputs.container_name }} -s ${{ secrets.SLACK_GITHUB_ACTIONS_ALERTS_WEBHOOK }}
         echo $sucess
