@@ -3,6 +3,6 @@
 
 for ips in {172.31.105.164}:
   do
-    ssh -o "StrictHostKeyChecking no" ec2-user@172.31.105.164 -t 'sudo docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Image}}"; sudo docker restart $(sudo docker ps -a -q)'
+    ssh -o "StrictHostKeyChecking no" ec2-user@$ips -t 'sudo docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Image}}"; sudo docker restart $(sudo docker ps -a -q)'
     echo "Container Restart Successfully"
 done
